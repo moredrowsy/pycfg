@@ -6,7 +6,6 @@ import sys
 from collections import deque
 from enum import auto
 from os import error
-from types import new_class
 from typing import Deque, List
 from .enum import OrderedEnum
 from .node import Node
