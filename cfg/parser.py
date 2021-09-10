@@ -967,6 +967,8 @@ class Parser():
                 # In else branch, IF node is no longer D0 but D1
                 start_node.type = DecompStates.D1
 
+                # TODO: Remove D0_END on last_walker?
+
             elif peek_state == FSMState.IF_THEN_END \
                     or peek_state == FSMState.ELSE_IF_END \
                     or peek_state == FSMState.IF_ELSE_END:

@@ -2,7 +2,7 @@
 Control Flow Graph
 """
 from collections import defaultdict, deque
-from typing import List
+from typing import List, Tuple
 import matplotlib.pyplot as plt
 import networkx as nx
 from .node import Node
@@ -94,7 +94,42 @@ class ControlFlowGraph():
 
         return edges
 
-    def graph(self):
+    def get_straight_and_curve_edges_from_edges(self, edges: List[Tuple[Node, Node]]):
+        """
+        Filter edges to straight and curve edges
+        Curve edges are where e1 -> e2 and e2 -> e1
+        """
+        straight = []
+        curve = []
+
+        for edge in edges:
+            e1, e2 = edge
+            if (e2, e1) in edges:
+                curve.append(edge)
+            else:
+                straight.append(edge)
+
+        return straight, curve
+
+    def print_nodes(self):
+        """Prints a list of nodes"""
+        print("Nodes\n-----", end="")
+        if self.nodes:
+            for node in self.nodes:
+                print(f"\n{node}")
+        else:
+            print("\nNone")
+
+    def print_edges(self):
+        """Prints a list of edges"""
+        print("Edges\n-----")
+        if self.edges:
+            for edge in self.edges:
+                print(f"({edge[0].val} --> {edge[1].val}),")
+        else:
+            print("None")
+
+    def draw_graph(self):
         """
         Graph the CFG with the current nodes and edges
         Use this only after calling ControlFlowGraph.parse()
@@ -111,6 +146,18 @@ class ControlFlowGraph():
         # Draw NetworkX's directed graph to Matplotlib
         nx.draw_networkx_nodes(DG, pos)
         nx.draw_networkx_labels(DG, pos)
-        nx.draw_networkx_edges(DG, pos, edge_color='r', arrows=True)
+        # nx.draw_networkx_edges(DG, pos, edge_color='r', arrows=True) # draw all edges
+
+        # Get straight and curve edges
+        straight, curve = self.get_straight_and_curve_edges_from_edges(
+            self.edges)
+
+        # draw straight edges
+        nx.draw_networkx_edges(DG, pos, edgelist=straight, edge_color='r',
+                               arrows=True)
+        # draw curve edges
+        nx.draw_networkx_edges(DG, pos, edgelist=curve,
+                               connectionstyle=f"arc3, rad = {0.3}",
+                               edge_color='r', arrows=True)
 
         plt.show()

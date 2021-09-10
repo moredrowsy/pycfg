@@ -23,9 +23,6 @@ class Node:
         if self.type:
             s += f"\n{self.type.name}"
 
-        if self.tokens:
-            s += "\n"
-
         for i in range(len(self.tokens)):
             if i > 0 and self.tokens[i-1].line == self.tokens[i].line:
                 s += f" {self.tokens[i].sequence}"

@@ -27,7 +27,10 @@ class Run():
             exit()
 
         cfg.parse()
-        cfg.graph()
+        cfg.print_nodes()
+        print("\n")
+        cfg.print_edges()
+        cfg.draw_graph()
 
     def get_filename(self):
         """Get input filename"""
