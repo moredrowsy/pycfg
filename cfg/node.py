@@ -17,6 +17,23 @@ class Node:
     def __repr__(self) -> str:
         return f"({self.val}) {self.type} {self.first_token()}"
 
+    def __str__(self) -> str:
+        s = f"({self.val})"
+
+        if self.type:
+            s += f"\n{self.type.name}"
+
+        if self.tokens:
+            s += "\n"
+
+        for i in range(len(self.tokens)):
+            if i > 0 and self.tokens[i-1].line == self.tokens[i].line:
+                s += f" {self.tokens[i].sequence}"
+            else:
+                s += f"\n{self.tokens[i].sequence}"
+
+        return s
+
     def __hash__(self) -> int:
         return self.val
 
