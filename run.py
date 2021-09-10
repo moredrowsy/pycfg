@@ -17,9 +17,14 @@ class Run():
 
         filename = self.get_filename()
 
-        with open(filename) as file:
-            for line in file:
-                cfg.add_string(line)
+        try:
+            with open(filename) as file:
+                for line in file:
+                    cfg.add_string(line)
+        except FileNotFoundError as file_error:
+            print(file_error)
+            print("Exiting...")
+            exit()
 
         cfg.parse()
         cfg.graph()

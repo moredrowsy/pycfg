@@ -4,10 +4,12 @@ Parses a block of code text into a control flow graph
 
 ## Requirements
 
+Installation directions based on Ubuntu 20.04
+
 - Python3
 
 ```bash
-sudo apt install python3
+sudo apt install python3 python3-pip build-essential python3-dev python3-setuptools
 ```
 
 ## Dependencies

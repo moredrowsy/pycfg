@@ -35,7 +35,7 @@ class Tokenizer():
                     break
 
             if not match:
-                raise Exception("No match found for string: " + s)
+                raise TokenizerError("No match found for string: " + s)
 
 
 class TokenInfo():
@@ -45,3 +45,7 @@ class TokenInfo():
         self.matcher: Pattern = re.compile(
             "^(" + regex + ")", flags=re.IGNORECASE)
         self.type = token_type
+
+
+class TokenizerError(Exception):
+    """Exception for Tokenizer"""

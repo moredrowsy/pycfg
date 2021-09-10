@@ -2,15 +2,13 @@
 """
 Parser
 """
-import sys
 from collections import deque
 from enum import auto
-from os import error
 from typing import Deque, List
 from .enum import OrderedEnum
 from .node import Node
 from .token import Token
-from .tokenizer import Tokenizer
+from .tokenizer import Tokenizer, TokenizerError
 
 
 class TokenState(OrderedEnum):
@@ -797,8 +795,8 @@ class Parser():
                 self.tokens += self.tokenizer.tokens
 
             return self.parse_tokens(self.tokens)
-        except error:
-            print("Unexpected error:", sys.exc_info()[0])
+        except TokenizerError as tokenizer_error:
+            print(tokenizer_error)
 
     def parse_tokens(self, tokens: Deque[Token]) -> Node:
         """Parse tokens into tree Nodes"""
