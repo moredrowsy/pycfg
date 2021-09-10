@@ -22,8 +22,7 @@ class Run():
                 cfg.add_string(line)
 
         cfg.parse()
-
-        print("cfg")
+        cfg.graph()
 
     def get_filename(self):
         """Get input filename"""

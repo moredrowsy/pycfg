@@ -3,6 +3,8 @@ Control Flow Graph
 """
 from collections import defaultdict, deque
 from typing import List
+import matplotlib.pyplot as plt
+import networkx as nx
 from .node import Node
 from .parser import Parser
 
@@ -91,3 +93,24 @@ class ControlFlowGraph():
                 edges.append((node, child))
 
         return edges
+
+    def graph(self):
+        """
+        Graph the CFG with the current nodes and edges
+        Use this only after calling ControlFlowGraph.parse()
+        """
+        DG = nx.DiGraph()
+
+        DG.add_nodes_from(self.nodes)  # Add nodes to graph
+        DG.add_edges_from(self.edges)  # Add edges to graph
+
+        # Get graph positions using Graphviz
+        pos = nx.nx_agraph.graphviz_layout(DG)
+        pos = nx.nx_agraph.graphviz_layout(DG, prog="dot")
+
+        # Draw NetworkX's directed graph to Matplotlib
+        nx.draw_networkx_nodes(DG, pos)
+        nx.draw_networkx_labels(DG, pos)
+        nx.draw_networkx_edges(DG, pos, edge_color='r', arrows=True)
+
+        plt.show()
