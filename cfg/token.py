@@ -5,7 +5,12 @@ from enum import Enum
 
 
 class Token():
-    """Token"""
+    """
+    Token
+
+    The Token will hold information for the token and the line at which the token
+    was in the original string.
+    """
 
     def __init__(self, line: int, token_type: Enum, sequence: str) -> None:
         self.line = line

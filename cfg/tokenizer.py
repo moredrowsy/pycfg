@@ -7,7 +7,15 @@ from .token import Token
 
 
 class Tokenizer():
-    """Tokenizer"""
+    """
+    Tokenizer
+
+    The Tokenizer will tokenize a string based on regex rules.
+    The order of regex search is the order of the rule added.
+    The regex will search only at the beginning of the string.
+    Everytime a regex is matched, it will produced a token for the matched string.
+    The matched string will then be removed from the original string.
+    """
 
     def __init__(self) -> None:
         self.token_infos: List[TokenInfo] = []

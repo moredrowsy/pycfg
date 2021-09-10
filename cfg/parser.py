@@ -133,7 +133,16 @@ class DecompStates(OrderedEnum):
 
 
 class Parser():
-    """Parser"""
+    """
+    Parser
+
+    The Parser will parse an array of strings (added by the user) into a list
+    of nodes that follows the control flow graph tree structure.
+
+    First add the strings using Parser.add_string()
+    After all the stings are added, invoke Parser.parse() to produce a list of
+    nodes.
+    """
 
     def __init__(self) -> None:
         self.tokenizer = Tokenizer()
@@ -145,6 +154,8 @@ class Parser():
         self._init_states()
 
     def _init_tokenizer(self) -> None:
+        # Tokenizer will regex search at the beginning of the string
+        # Example: the final compiled regex is ^(regex)
         self.tokenizer.add_regex(r";", TokenState.SEMICOLON)
         self.tokenizer.add_regex(r"if", TokenState.IF)
         self.tokenizer.add_regex(r"else", TokenState.ELSE)
