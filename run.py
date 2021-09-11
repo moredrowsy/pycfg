@@ -25,8 +25,10 @@ class Run():
             parser.add_argument(k, help=v)
         args = parser.parse_args()
 
+        # Default values for input and output directory
         inDir, outDir = "./input", "./output"
 
+        # Override with user specified directories if exist
         inDir = args.id if args.id else inDir
         inDir = args.inDir if args.inDir else inDir
         outDir = args.od if args.od else outDir
@@ -43,6 +45,7 @@ class Run():
                     for line in file:
                         cfg.add_string(line)
 
+                # Parse all the strings from input to CFG
                 cfg.parse()
 
                 # Create output file
@@ -55,7 +58,7 @@ class Run():
                 try:
                     print(filename+"\n"+"="*len(filename)+"\n")
 
-                    # Print cfg info
+                    # Print and output all nodes
                     output = cfg.print_nodes()
 
                     print("\n")
@@ -63,6 +66,7 @@ class Run():
                     fout.write(output)
                     fout.write("\n")
 
+                    # Print and output all edges
                     output = cfg.print_edges()
 
                     fout.write(output)
@@ -74,10 +78,11 @@ class Run():
                     image_output_filename = self.get_output_filename(
                         filename, ".png")
                     image_output_path = f"{outDir}/{image_output_filename}"
-                    # Draw graph
+
+                    # Display graph and save the image
                     cfg.draw_graph(title=filename, filename=image_output_path)
                 finally:
-                    fout.close()
+                    fout.close()  # Must close the file no matter what
 
             except FileNotFoundError as file_error:
                 print(f"Error opening {filename}: {file_error}")
