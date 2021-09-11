@@ -113,23 +113,31 @@ class ControlFlowGraph():
 
     def print_nodes(self):
         """Prints a list of nodes"""
-        print("Nodes\n-----", end="")
+        output = "Nodes\n-----"
+
         if self.nodes:
             for node in self.nodes:
-                print(f"\n{node}")
+                output += f"\n{node}\n"
         else:
-            print("\nNone")
+            output += "\nNone\n"
+
+        print(output, end="")
+        return output
 
     def print_edges(self):
         """Prints a list of edges"""
-        print("Edges\n-----")
+        output = "Edges\n-----\n"
+
         if self.edges:
             for edge in self.edges:
-                print(f"({edge[0].val} --> {edge[1].val}),")
+                output += f"({edge[0].val} --> {edge[1].val})\n"
         else:
-            print("None")
+            output += "None\n"
 
-    def draw_graph(self):
+        print(output, end="")
+        return output
+
+    def draw_graph(self, title=None, filename=None):
         """
         Graph the CFG with the current nodes and edges
         Use this only after calling ControlFlowGraph.parse()
@@ -159,5 +167,11 @@ class ControlFlowGraph():
         nx.draw_networkx_edges(DG, pos, edgelist=curve,
                                connectionstyle=f"arc3, rad = {0.3}",
                                edge_color='r', arrows=True)
+
+        if title:
+            plt.title(title)
+
+        if filename:
+            plt.savefig(filename, format="PNG")
 
         plt.show()
