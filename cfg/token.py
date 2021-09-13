@@ -20,6 +20,9 @@ class Token():
     def __repr__(self) -> str:
         return f"l: {self.line} t: {self.type} s: {self.sequence}"
 
+    def __str__(self) -> str:
+        return f"l: {self.line} t: {self.type} s: {self.sequence}"
+
     def __eq__(self, o: object) -> bool:
         if self is o:
             return True

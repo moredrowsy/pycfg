@@ -882,7 +882,7 @@ class Parser():
             peek_state = self.states[state.value][peek_input.value]
 
             if peek_state == FSMState.ERROR:
-                print("Error parsing token grammar for " + peek_token)
+                print("Error parsing token grammar for " + str(peek_token))
                 return walker
 
             token = tokens.popleft()
@@ -929,7 +929,7 @@ class Parser():
                 if is_success:
                     break
 
-                print("Error parsing token grammar for " + peek_token)
+                print("Error parsing token grammar for " + str(peek_token))
                 return walker
 
             if peek_state == FSMState.IF_THEN_SINGLE_STATEMENT \
@@ -1061,7 +1061,7 @@ class Parser():
                 if is_success:
                     break
 
-                print("Error parsing token grammar for " + peek_token)
+                print("Error parsing token grammar for " + str(peek_token))
                 return walker
 
             if peek_state == FSMState.WHILE_STATEMENT \
@@ -1155,7 +1155,7 @@ class Parser():
                 if is_success:
                     break
 
-                print("Error parsing token grammar for " + peek_token)
+                print("Error parsing token grammar for " + str(peek_token))
                 return walker
 
             if peek_state == FSMState.DO_WHILE_STATEMENT:
@@ -1251,7 +1251,7 @@ class Parser():
                 if is_success:
                     break
 
-                print("Error parsing token grammar for " + peek_token)
+                print("Error parsing token grammar for " + str(peek_token))
                 return walker
 
             if peek_state == FSMState.FOR_COND \
@@ -1399,7 +1399,7 @@ class Parser():
                 if is_success:
                     break
 
-                print("Error parsing token grammar for " + peek_token)
+                print("Error parsing token grammar for " + str(peek_token))
                 return walker
 
             if peek_state == FSMState.FUNC_STATEMENT:
@@ -1446,7 +1446,7 @@ class Parser():
             state = peek_state
 
         if not end_node:
-            print("Error parsing token grammar for " + peek_token)
+            print("Error parsing token grammar for " + str(peek_token))
             return walker
 
         return end_node
