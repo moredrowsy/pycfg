@@ -1,3 +1,6 @@
 do {
     x = 1;
+    do {
+        x = 1;
+    } while(true);
 } while(true);

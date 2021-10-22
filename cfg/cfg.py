@@ -55,7 +55,7 @@ class ControlFlowGraph():
             for children in root.children:
                 root_children[children] = children
 
-            # merge parent nodes
+            # merge nodes with same index and type
             for node in nodes:
                 # merge parents
                 for parent in node.parents:
